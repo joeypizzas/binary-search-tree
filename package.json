@@ -1,7 +1,7 @@
 {
-  "name": "template",
+  "name": "Binary search tree",
   "version": "1.0.0",
-  "description": "Template repo for HTML/CSS/JS projects",
+  "description": "Simple binary search tree implementation by joeypizzas",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

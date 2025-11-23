@@ -1,3 +1,1 @@
-// Template index.js file
-
-import "./style.css";
+// Binary search tree JS index
