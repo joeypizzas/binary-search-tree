@@ -66,3 +66,17 @@
         - While root and right.left: - root equals root.left.
           root.right = recursively delete root right and root value
       - return root.
+    - find(root, value):
+      - if !root, return error saying the value isn't in the BST.
+      - if root value === value param, return root.
+      - if value < root, recursively call find() with root.left and value.
+      - Else, recursively call find() with root.right and value.
+    - levelOrderForEach(callback):
+      - pass callback param. (I don't need to pass root because this method is inside of a tree class, where root is a stored key on the constructor)
+      - Check to make sure typeof callback is function, and return error, if not.
+      - initalize an array (queue)
+      - push the root node to the array.
+      - run a while loop that goes until the array (queue) is empty.
+      - invoke callback function that console logs the first array node value
+      - Add first array item right and left to the queue (if there are any).
+      - call array shift
