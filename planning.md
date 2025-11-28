@@ -66,11 +66,11 @@
         - While root and right.left: - root equals root.left.
           root.right = recursively delete root right and root value
       - return root.
-    - find(root, value):
-      - if !root, return error saying the value isn't in the BST.
-      - if root value === value param, return root.
-      - if value < root, recursively call find() with root.left and value.
-      - Else, recursively call find() with root.right and value.
+    - find(node, value):
+      - if !node, return error saying the value isn't in the BST.
+      - if node value === value param, return node.
+      - if value < node, recursively call find() with node.left and value.
+      - Else, recursively call find() with node.right and value.
     - levelOrderForEach(callback):
       - pass callback param. (I don't need to pass root because this method is inside of a tree class, where root is a stored key on the constructor)
       - Check to make sure typeof callback is function, and return error, if not.
@@ -80,3 +80,41 @@
       - invoke callback function that console logs the first array node value
       - Add first array item right and left to the queue (if there are any).
       - call array shift
+    - preOrderForEach(callback, node):
+      - pass callback param and node, since need the node reference for recursive call.
+      - Check to make sure typeof callback is function and return error, if not.
+      - if !node, then return.
+      - Invoke callback that console logs the node.value param.
+      - Recursively call preOrderForEach with node.left.
+      - Recursively call preOrderForEach with node.right.
+    - inOrderForEach(callback, node):
+      - pass callback param and node, since need the node reference for recursive call.
+      - Check to make sure typeof callback is function and return error, if not.
+      - if !node, then return.
+      - Recursively call inOrderForEach with node.left.
+      - Invoke callback that console logs the node.value param.
+      - Recursively call inOrderForEach with node.right.
+    - postOrderForEach(callback, node):
+      - pass callback param and node, since need the node reference for recursive call.
+      - Check to make sure typeof callback is function and return error, if not.
+      - if !node, then return.
+      - Recursively call postOrderForEach with node.left.
+      - Recursively call postOrderForEach with node.right.
+      - Invoke callback that console logs the node.value param.
+    - height(value):
+      - It returns the height of the node containing the given value. Height is defined as the number of edges in the longest path from that node to a leaf node. If the value is not found in the tree, the function should return null.
+      - Takes value param.
+      - sets node variable = find method invocation. It will works as follows:
+        - find(node, value). Node param is tree root and value param is value from height method.
+        - if !node, return error saying the value isn't in the BST.
+        - if node value === value param, return node.
+        - if value < node, recursively call find() with node.left and value.
+        - Else, recursively call find() with node.right and value.
+      - defines new function getNodeHeight(node):
+        - pass node param, which is starter node for calculating height.
+        - if !node, then return 0.
+        - let height = 1.
+        - let leftHeight = recursive getNodeHeight(node.left).
+        - let rightHeight = recursive getNodeHeight(node.right).
+        - If leftHight < rightHeight, then return height += rightHeight.
+        - Else. return height += leftHeight.
