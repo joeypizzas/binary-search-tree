@@ -118,3 +118,29 @@
         - let rightHeight = recursive getNodeHeight(node.right).
         - If leftHight < rightHeight, then return height += rightHeight.
         - Else. return height += leftHeight.
+    - depth(node, value):
+      - Write a depth(value) function that returns the depth of the node containing the given value. Depth is defined as the number of edges in the path from that node to the root node. If the value is not found in the tree, the function should return null.
+      - Takes node and value param.
+      - if !node, then return error saying value isn't in the BST.
+      - else if node.value === value, then return 0.
+      - else:
+        - let height = 1.
+        - if value param < node, then return height += recursive depth(node.left, value).
+        - else, return height += recursive depth(node.right,value).
+    - isBalanced(node):
+      - A binary tree is considered balanced if, for every node in the tree, the height difference between its left and right subtrees is no more than 1, and both the left and right subtrees are also balanced.
+      - pass node param.
+      - if !node, return 0.
+      - let leftHeight = 1.
+      - let rightHeight = 1.
+      - leftHeight += isBalanced(node.left).
+      - rightHeight += isBalanced(node.right).
+      - if (-1 <= (leftHeight - rightHeight) <=1) then:
+        - if (leftHeight > rightHeight), then return {leftHeight, isBalanced: true}.
+        - else, return {rightHeight, isBalanced: true}.
+      - if (leftHeight > rightHeight)
+        - if (-1 <= (leftHeight - rightHeight) <=1), then return {leftHeight, isBalanced: true}
+        - Else, return {leftHeight, isBalanced: false}.
+      - else:
+        - if (-1 <= (leftHeight - rightHeight) <=1), then return {rightHeight, isBalanced: true}
+        - Else, return {rightHeight, isBalanced: false}.
