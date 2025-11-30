@@ -130,17 +130,27 @@
     - isBalanced(node):
       - A binary tree is considered balanced if, for every node in the tree, the height difference between its left and right subtrees is no more than 1, and both the left and right subtrees are also balanced.
       - pass node param.
-      - if !node, return 0.
+      - if !node, return {height: 0, isBalanced: undefined}.
       - let leftHeight = 1.
       - let rightHeight = 1.
-      - leftHeight += isBalanced(node.left).
-      - rightHeight += isBalanced(node.right).
-      - if (-1 <= (leftHeight - rightHeight) <=1) then:
-        - if (leftHeight > rightHeight), then return {leftHeight, isBalanced: true}.
-        - else, return {rightHeight, isBalanced: true}.
+      - leftHeight += isBalanced(node.left).height.
+      - rightHeight += isBalanced(node.right).height.
       - if (leftHeight > rightHeight)
-        - if (-1 <= (leftHeight - rightHeight) <=1), then return {leftHeight, isBalanced: true}
-        - Else, return {leftHeight, isBalanced: false}.
+        - if (-1 <= (leftHeight - rightHeight) <=1), then return {height: leftHeight, isBalanced: true}
+        - Else, return {height: leftHeight, isBalanced: false}.
       - else:
-        - if (-1 <= (leftHeight - rightHeight) <=1), then return {rightHeight, isBalanced: true}
-        - Else, return {rightHeight, isBalanced: false}.
+        - if (-1 <= (leftHeight - rightHeight) <=1), then return {height: rightHeight, isBalanced: true}
+        - Else, return {height: rightHeight, isBalanced: false}.
+    - rebalance():
+      - set sortedArray = invocation of inOrderForEach(callback, node), with the callback adding each node value to an array. It will take tree root as the parameter.
+      - return buildTree(sortedArray), which uses the classes existing build tree method to create a balanced BST with the new sorted array.
+- Write the driver script in index.js.
+  - Write simple function to generate array of random numbers < 100 using math.random function. Maybe say 20 numbers.
+  - Create new class instance using an array the function.
+  - Invoke isBalanced to confirm the tree is balanced.
+  - Print all elements in level, pre, post and in order traversal to confirm works as expected.
+  - Unbalance the tree by adding several numbers greater than 100.
+  - Confirm tree is now unbalanced using isBalanced method.
+  - Balance the tree using rebalance.
+  - Confirm tree is now balanced using isBalanced.
+  - Print out all elements in level, pre, post, and in order.
