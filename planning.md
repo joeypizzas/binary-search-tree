@@ -63,8 +63,9 @@
         - If ! root right, return root left.
         - initialize successor variable.
         - root = root.right.
-        - While root and right.left: - root equals root.left.
-          root.right = recursively delete root right and root value
+        - While root and right.left:
+          - root equals root.left.
+          - root.right = recursively delete root right and root value
       - return root.
     - find(node, value):
       - if !node, return error saying the value isn't in the BST.
