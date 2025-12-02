@@ -76,7 +76,7 @@ export class Tree {
   }
 
   find(node, value) {
-    if (!node) return `Oops! ${value} isn't in the binary search tree.`;
+    if (!node) return null;
     if (node.value === value) return node;
 
     if (value < node.value) {
@@ -137,5 +137,27 @@ export class Tree {
     this.postOrderForEach(callback, root.left);
     this.postOrderForEach(callback, root.right);
     callback(root.value);
+  }
+
+  height(value) {
+    let node = this.find(this.root, value);
+
+    if (!node) return null;
+
+    function getNodeHeight(nodeParam) {
+      if (!nodeParam) return 0;
+
+      let height = 1;
+      let leftHeight = getNodeHeight(nodeParam.left);
+      let rightHeight = getNodeHeight(nodeParam.right);
+
+      if (leftHeight < rightHeight) {
+        return (height += rightHeight);
+      } else {
+        return (height += leftHeight);
+      }
+    }
+
+    return getNodeHeight(node);
   }
 }
