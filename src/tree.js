@@ -160,4 +160,43 @@ export class Tree {
 
     return getNodeHeight(node);
   }
+
+  depth(node, value) {
+    if (!node) return null;
+
+    if (node.value === value) return 0;
+
+    if (value < node.value) {
+      const d = this.depth(node.left, value);
+      if (d === null) return null;
+      return 1 + d;
+    } else {
+      const d = this.depth(node.right, value);
+      if (d === null) return null;
+      return 1 + d;
+    }
+  }
+
+  isBalanced(node) {
+    if (!node) return { height: 0, balanced: true };
+
+    let leftHeight = 1;
+    let rightHeight = 1;
+    leftHeight += this.isBalanced(node.left).height;
+    rightHeight += this.isBalanced(node.right).height;
+
+    if (leftHeight > rightHeight) {
+      if (-1 <= leftHeight - rightHeight <= 1) {
+        return { height: leftHeight, balanced: true };
+      } else {
+        return { height: leftHeight, balanced: false };
+      }
+    } else {
+      if (-1 <= leftHeight - rightHeight <= 1) {
+        return { height: rightHeight, balanced: true };
+      } else {
+        return { height: rightHeight, balanced: false };
+      }
+    }
+  }
 }
