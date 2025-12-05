@@ -180,23 +180,25 @@ export class Tree {
   isBalanced(node) {
     if (!node) return { height: 0, balanced: true };
 
-    let leftHeight = 1;
-    let rightHeight = 1;
-    leftHeight += this.isBalanced(node.left).height;
-    rightHeight += this.isBalanced(node.right).height;
+    const left = this.isBalanced(node.left);
+    const right = this.isBalanced(node.right);
+
+    let leftHeight = 1 + left.height;
+    let rightHeight = 1 + right.height;
+
+    const balanced =
+      left.balanced &&
+      right.balanced &&
+      Math.abs(leftHeight - rightHeight) <= 1;
 
     if (leftHeight > rightHeight) {
-      if (-1 <= leftHeight - rightHeight <= 1) {
-        return { height: leftHeight, balanced: true };
-      } else {
-        return { height: leftHeight, balanced: false };
-      }
+      return { height: leftHeight, balanced };
     } else {
-      if (-1 <= leftHeight - rightHeight <= 1) {
-        return { height: rightHeight, balanced: true };
-      } else {
-        return { height: rightHeight, balanced: false };
-      }
+      return { height: rightHeight, balanced };
     }
+  }
+
+  rebalance() {
+    // rewrite level order for each in here to work with what's required here.
   }
 }
