@@ -199,6 +199,11 @@ export class Tree {
   }
 
   rebalance() {
-    // rewrite level order for each in here to work with what's required here.
+    const sortedArray = [];
+    function pushValueToArray(value) {
+      sortedArray.push(value);
+    }
+    this.inOrderForEach(pushValueToArray, this.root);
+    return this.buildTree(sortedArray);
   }
 }
