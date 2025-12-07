@@ -2,17 +2,17 @@
 
 import { Node } from "./node.js";
 
+export function sortAndRemoveDuplicates(array) {
+  array.sort((a, b) => a - b);
+  const uniqueSortedArray = array.filter(
+    (value, i, self) => value !== self[i - 1],
+  );
+  return uniqueSortedArray;
+}
+
 export class Tree {
   constructor(array) {
     this.root = this.buildTree(array);
-  }
-
-  sortAndRemoveDuplicates(array) {
-    array.sort((a, b) => a - b);
-    const uniqueSortedArray = array.filter(
-      (value, i, self) => value !== self[i - 1],
-    );
-    return uniqueSortedArray;
   }
 
   buildTree(array) {
@@ -37,7 +37,7 @@ export class Tree {
         false,
       );
     }
-    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
     if (node.left !== null) {
       this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
     }
@@ -183,19 +183,13 @@ export class Tree {
     const left = this.isBalanced(node.left);
     const right = this.isBalanced(node.right);
 
-    let leftHeight = 1 + left.height;
-    let rightHeight = 1 + right.height;
-
+    const height = 1 + Math.max(left.height, right.height);
     const balanced =
       left.balanced &&
       right.balanced &&
-      Math.abs(leftHeight - rightHeight) <= 1;
+      Math.abs(left.height - right.height) <= 1;
 
-    if (leftHeight > rightHeight) {
-      return { height: leftHeight, balanced };
-    } else {
-      return { height: rightHeight, balanced };
-    }
+    return { height, balanced };
   }
 
   rebalance() {
